@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases y Horarios - Roller Speed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="~{fragments/navbar :: menu}"></div>
+
+    <div class="container my-5 flex-grow-1">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-2 border-bottom">
+            <div>
+                <h2 class="fw-bold text-primary mb-1">
+                    <i class="bi bi-calendar-week-fill me-2"></i>Programación de Clases y Horarios
+                </h2>
+                <p class="text-muted mb-0">Distribución de pistas, entrenadores y disponibilidad de cupos por nivel de patinaje.</p>
+            </div>
+            <div class="mt-3 mt-md-0">
+                <a th:href="@{/inscripcion}" class="btn btn-primary fw-bold">
+                    <i class="bi bi-lightning-charge-fill me-1"></i>Inscribirme a una Clase
+                </a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4" th:each="c : ${clases}">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-bold" th:text="${c.nombre}">Clase</span>
+                        <span th:if="${c.nivel == 'Principiante'}" class="badge bg-info text-dark">Principiante</span>
+                        <span th:if="${c.nivel == 'Intermedio'}" class="badge bg-warning text-dark">Intermedio</span>
+                        <span th:if="${c.nivel == 'Avanzado'}" class="badge bg-danger">Avanzado</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-3">
+                            <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+                            <strong>Pista:</strong> <span th:text="${c.pista}">Pista Central</span>
+                        </p>
+                        <p class="card-text mb-3">
+                            <i class="bi bi-clock-fill text-primary me-2"></i>
+                            <strong>Horario:</strong> <span th:text="${c.horario}">Horario</span>
+                        </p>
+                        <p class="card-text mb-3">
+                            <i class="bi bi-person-fill-check text-success me-2"></i>
+                            <strong>Instructor a cargo:</strong> <span th:text="${c.instructor}" class="fw-semibold">Profesor</span>
+                        </p>
+
+                        <div class="mt-4 pt-3 border-top">
+                            <div class="d-flex justify-content-between small text-muted mb-1">
+                                <span>Ocupación de la Clase:</span>
+                                <span class="fw-bold" th:text="${c.inscritos} + ' / ' + ${c.cupoMaximo} + ' alumnos'"></span>
+                            </div>
+                            <div class="progress mb-2" style="height: 10px;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                     th:style="'width: ' + (${c.inscritos} * 100 / ${c.cupoMaximo}) + '%;'"
+                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-light text-dark border">
+                                    <i class="bi bi-ticket-perforated me-1"></i>Cupos libres: <strong th:text="${c.cupoDisponible}" class="text-success"></strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: pie}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

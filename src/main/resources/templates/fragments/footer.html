@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <footer th:fragment="pie" class="bg-dark text-white pt-4 pb-3 mt-5 border-top border-secondary">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-5">
+                    <h5 class="text-warning fw-bold mb-3">&#9889; Escuela de Patinaje Roller Speed</h5>
+                    <p class="text-secondary small mb-2">
+                        Formando campeones sobre ruedas en Santa Marta, Colombia. Desarrollamos disciplina deportiva,
+                        técnica de velocidad y valores humanos en niños, jóvenes y adultos.
+                    </p>
+                    <p class="text-secondary small">
+                        <strong>Sede Principal:</strong> Complejo Deportivo Bolivariano, Santa Marta, Magdalena.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-uppercase fw-bold text-light mb-3">Módulos del PMV</h6>
+                    <ul class="list-unstyled small">
+                        <li><a th:href="@{/inscripcion}" class="text-secondary text-decoration-none hover-white">Inscripción en Línea</a></li>
+                        <li><a th:href="@{/alumnos}" class="text-secondary text-decoration-none">Gestión de Alumnos</a></li>
+                        <li><a th:href="@{/instructores}" class="text-secondary text-decoration-none">Cuerpo Técnico</a></li>
+                        <li><a th:href="@{/clases}" class="text-secondary text-decoration-none">Programación de Clases</a></li>
+                        <li><a th:href="@{/pagos}" class="text-secondary text-decoration-none">Control de Mensualidades</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-uppercase fw-bold text-light mb-3">Información Académica</h6>
+                    <p class="small text-secondary mb-1"><strong>Asignatura:</strong> Frameworks (Unidad 2 - MVC y Thymeleaf)</p>
+                    <p class="small text-secondary mb-1"><strong>Institución:</strong> IU Digital de Antioquia</p>
+                    <p class="small text-secondary mb-1"><strong>Estudiante:</strong> Adrianys Saumeth</p>
+                    <p class="small text-secondary"><strong>Arquitectura:</strong> Spring Boot 3.3.3 + Thymeleaf + MVC</p>
+                </div>
+            </div>
+            <hr class="border-secondary my-3"/>
+            <div class="text-center small text-secondary">
+                &copy; 2026 Roller Speed Santa Marta. Todos los derechos reservados. Evidencia de Aprendizaje 2 (EA2) - PMV.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

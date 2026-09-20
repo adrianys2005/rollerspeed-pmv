@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuerpo Técnico e Instructores - Roller Speed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="~{fragments/navbar :: menu}"></div>
+
+    <div class="container my-5 flex-grow-1">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold text-primary display-6 mb-2">
+                <i class="bi bi-award-fill text-warning me-2"></i>Cuerpo Técnico y Entrenadores
+            </h1>
+            <p class="lead text-muted">Profesionales certificados con amplia trayectoria nacional en patinaje de carreras y formación deportiva.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3" th:each="instructor : ${instructores}">
+                <div class="card h-100 shadow-sm border-0 text-center p-3">
+                    <div class="py-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 80px; height: 80px;">
+                            <i class="bi bi-person-badge-fill fs-1"></i>
+                        </div>
+                    </div>
+                    <div class="card-body p-2">
+                        <h5 class="card-title fw-bold text-dark mb-1" th:text="${instructor.nombreCompleto}">Profesor</h5>
+                        <p class="text-primary small fw-semibold mb-2" th:text="${instructor.especialidad}">Especialidad</p>
+                        <div class="mb-3">
+                            <span class="badge bg-warning text-dark me-1" th:text="'Nivel ' + ${instructor.nivelAsignado}">Nivel</span>
+                            <span class="badge bg-info text-dark" th:text="${instructor.experienciaAnios} + ' años exp.'">Experiencia</span>
+                        </div>
+                        <ul class="list-unstyled small text-muted text-start border-top pt-2">
+                            <li class="mb-1"><i class="bi bi-clock-history text-secondary me-2"></i><span th:text="${instructor.horarioTurno}"></span></li>
+                            <li class="mb-1"><i class="bi bi-envelope text-secondary me-2"></i><span th:text="${instructor.email}"></span></li>
+                            <li><i class="bi bi-telephone text-secondary me-2"></i><span th:text="${instructor.telefono}"></span></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <a th:href="@{/clases}" class="btn btn-outline-primary btn-sm w-100">Ver Clases Asignadas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: pie}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
