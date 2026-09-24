@@ -72,9 +72,9 @@
                     </thead>
                     <tbody>
                         <tr th:each="p : ${pagos}">
-                            <td class="ps-3 font-monospace text-light fw-bold" th:text="${p.codigoComprobante}">AUT-12345</td>
+                            <td class="ps-3 font-monospace text-light fw-bold" th:text="${p.referencia}">AUT-12345</td>
                             <td class="fw-semibold text-white" th:text="${p.alumnoNombre}">Mariana Pacheco</td>
-                            <td class="text-muted font-monospace" th:text="${p.alumnoDocumento}">1082938471</td>
+                            <td class="text-muted font-monospace" th:text="${p.documento}">1082938471</td>
                             <td class="text-secondary small" th:text="${p.concepto}">Inscripción en línea</td>
                             <td>
                                 <span class="badge bg-dark border border-secondary text-light" th:text="${p.metodoPago}">PSE</span>
@@ -88,7 +88,7 @@
                                     <i class="bi bi-hourglass-split me-1"></i>Pendiente
                                 </span>
                             </td>
-                            <td class="pe-3 font-monospace text-muted small" th:text="${p.fechaPago}">2026-09-20</td>
+                            <td class="pe-3 font-monospace text-muted small" th:text="${p.fecha}">2026-09-20</td>
                         </tr>
                     </tbody>
                 </table>
