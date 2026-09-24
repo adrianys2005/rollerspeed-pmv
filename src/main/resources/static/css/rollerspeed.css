@@ -422,11 +422,45 @@ h1, h2, h3, h4, h5, .brand-font {
     margin-bottom: 0.4rem;
 }
 
+/* HIGH CONTRAST TEXT OVERRIDES */
+.text-muted {
+    color: #cbd5e1 !important;
+}
+
+.text-secondary {
+    color: #e2e8f0 !important;
+}
+
 /* FOOTER */
 .rs-footer {
-    background: #050608;
-    border-top: 1px solid var(--rs-border-dark);
-    color: var(--rs-text-muted);
-    padding: 3rem 0 1.5rem;
+    background: #07090e;
+    border-top: 2px solid rgba(255, 30, 39, 0.25);
+    color: #cbd5e1;
+    padding: 3.5rem 0 2rem;
     margin-top: auto;
 }
+
+.rs-footer p {
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+.rs-footer a {
+    color: #e2e8f0 !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.rs-footer a:hover {
+    color: #ff3b44 !important;
+    padding-left: 2px;
+}
+
+.rs-footer strong {
+    color: #ffffff !important;
+}
+
+.rs-footer .text-muted {
+    color: #94a3b8 !important;
+}
+
