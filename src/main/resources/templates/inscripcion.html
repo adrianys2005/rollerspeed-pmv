@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -6,46 +6,36 @@
     <title>Inscripción de Aspirantes - Roller Speed</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <style>
-        .hero-banner { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 2.5rem 0; }
-        .card-form { border-radius: 12px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/rollerspeed.css}" href="/css/rollerspeed.css">
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
     <div th:replace="~{fragments/navbar :: menu}"></div>
 
-    <div class="hero-banner mb-4">
-        <div class="container text-center">
-            <h1 class="fw-bold display-6 mb-2"><i class="bi bi-pencil-square text-warning me-2"></i>Inscripción en Línea de Aspirantes</h1>
-            <p class="lead mb-0 text-white-50">Registro autónomo e inmediato con selección de método de pago (Sin aprobación manual)</p>
-        </div>
-    </div>
-
-    <div class="container flex-grow-1">
+    <div class="container my-5 flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <div class="card card-form p-4 p-md-5 bg-white">
-                    <div class="d-flex align-items-center mb-4 pb-2 border-bottom">
-                        <div class="bg-primary text-white rounded-circle p-3 me-3">
-                            <i class="bi bi-person-plus-fill fs-3"></i>
-                        </div>
-                        <div>
-                            <h4 class="fw-bold mb-1 text-primary">Formulario de Registro de Nuevo Alumno</h4>
-                            <p class="text-muted small mb-0">Complete la información requerida para activar inmediatamente su matrícula en Roller Speed.</p>
-                        </div>
-                    </div>
+                <div class="text-center mb-4">
+                    <span class="badge bg-danger bg-opacity-25 text-danger px-3 py-1 mb-2 font-monospace">REGISTRO AUTÓNOMO (MVC + REST)</span>
+                    <h1 class="fw-bold text-white display-6 mb-2 brand-font">
+                        <i class="bi bi-pencil-square text-danger me-2"></i>INSCRIPCIÓN EN LÍNEA DE ASPIRANTES
+                    </h1>
+                    <p class="text-muted fs-6">Alta inmediata en el directorio de alumnos y emisión automática de recibo de pago.</p>
+                </div>
 
-                    <form th:action="@{/inscripcion}" th:object="${aspirante}" method="post" class="needs-validation">
+                <div class="rs-card p-4 p-md-5" style="border: 2px solid rgba(255, 30, 39, 0.35);">
+                    <form th:action="@{/inscripcion}" th:object="${aspirante}" method="post">
                         
-                        <h6 class="text-uppercase fw-bold text-secondary small mb-3"><i class="bi bi-person-vcard me-2"></i>1. Datos Personales</h6>
+                        <h5 class="text-white fw-bold mb-3 brand-font pb-2 border-bottom border-secondary border-opacity-25">
+                            <i class="bi bi-person-vcard text-danger me-2"></i>1. DATOS PERSONALES
+                        </h5>
                         <div class="row g-3 mb-4">
                             <div class="col-md-12">
-                                <label class="form-label fw-semibold">Nombre Completo del Aspirante</label>
-                                <input type="text" class="form-control" th:field="*{nombreCompleto}" placeholder="Ej. Valentina Maria Restrepo" required>
+                                <label class="rs-form-label">Nombre Completo del Aspirante</label>
+                                <input type="text" class="form-control rs-form-control" th:field="*{nombreCompleto}" placeholder="Ej. Valentina Maria Restrepo" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Tipo de Documento</label>
-                                <select class="form-select" th:field="*{tipoDocumento}" required>
+                                <label class="rs-form-label">Tipo de Documento</label>
+                                <select class="form-select rs-form-control" th:field="*{tipoDocumento}" required>
                                     <option value="" disabled selected>Seleccione...</option>
                                     <option value="TI">Tarjeta de Identidad (TI)</option>
                                     <option value="RC">Registro Civil (RC)</option>
@@ -54,16 +44,16 @@
                                 </select>
                             </div>
                             <div class="col-md-8">
-                                <label class="form-label fw-semibold">Número de Documento</label>
-                                <input type="text" class="form-control" th:field="*{numeroDocumento}" placeholder="Ej. 1082948271" required>
+                                <label class="rs-form-label">Número de Documento</label>
+                                <input type="text" class="form-control rs-form-control" th:field="*{numeroDocumento}" placeholder="Ej. 1082948271" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" th:field="*{fechaNacimiento}" required>
+                                <label class="rs-form-label">Fecha de Nacimiento</label>
+                                <input type="date" class="form-control rs-form-control" th:field="*{fechaNacimiento}" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Género</label>
-                                <select class="form-select" th:field="*{genero}" required>
+                                <label class="rs-form-label">Género</label>
+                                <select class="form-select rs-form-control" th:field="*{genero}" required>
                                     <option value="" disabled selected>Seleccione...</option>
                                     <option value="Femenino">Femenino</option>
                                     <option value="Masculino">Masculino</option>
@@ -72,27 +62,31 @@
                             </div>
                         </div>
 
-                        <h6 class="text-uppercase fw-bold text-secondary small mb-3"><i class="bi bi-telephone-inbound me-2"></i>2. Información de Contacto</h6>
+                        <h5 class="text-white fw-bold mb-3 brand-font pb-2 border-bottom border-secondary border-opacity-25">
+                            <i class="bi bi-telephone-inbound text-danger me-2"></i>2. INFORMACIÓN DE CONTACTO
+                        </h5>
                         <div class="row g-3 mb-4">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Correo Electrónico (del alumno o acudiente)</label>
-                                <input type="email" class="form-control" th:field="*{email}" placeholder="correo@ejemplo.com" required>
+                                <label class="rs-form-label">Correo Electrónico (Alumno o Acudiente)</label>
+                                <input type="email" class="form-control rs-form-control" th:field="*{email}" placeholder="correo@ejemplo.com" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Teléfono Celular / WhatsApp</label>
-                                <input type="tel" class="form-control" th:field="*{telefono}" placeholder="Ej. 3001234567" required>
+                                <label class="rs-form-label">Teléfono Celular / WhatsApp</label>
+                                <input type="tel" class="form-control rs-form-control" th:field="*{telefono}" placeholder="Ej. 3001234567" required>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label fw-semibold">Dirección de Residencia (Santa Marta)</label>
-                                <input type="text" class="form-control" th:field="*{direccion}" placeholder="Ej. Calle 22 # 15-40, Barrio Bavaria" required>
+                                <label class="rs-form-label">Dirección de Residencia (Santa Marta)</label>
+                                <input type="text" class="form-control rs-form-control" th:field="*{direccion}" placeholder="Ej. Calle 22 # 15-40, Barrio Bavaria" required>
                             </div>
                         </div>
 
-                        <h6 class="text-uppercase fw-bold text-secondary small mb-3"><i class="bi bi-trophy me-2"></i>3. Nivel de Patinaje y Medio de Pago</h6>
+                        <h5 class="text-white fw-bold mb-3 brand-font pb-2 border-bottom border-secondary border-opacity-25">
+                            <i class="bi bi-trophy text-danger me-2"></i>3. NIVEL FORMATIVO Y MÉTODO DE PAGO
+                        </h5>
                         <div class="row g-3 mb-4">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Nivel Deportivo Deseado</label>
-                                <select class="form-select" th:field="*{nivel}" required>
+                                <label class="rs-form-label">Nivel Deportivo Deseado</label>
+                                <select class="form-select rs-form-control" th:field="*{nivel}" required>
                                     <option value="" disabled selected>Seleccione nivel...</option>
                                     <option value="Principiante">Principiante (Iniciación y Semillero)</option>
                                     <option value="Intermedio">Intermedio (Técnica y Transición)</option>
@@ -100,8 +94,8 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Método de Pago Seleccionado</label>
-                                <select class="form-select" th:field="*{metodoPago}" required>
+                                <label class="rs-form-label">Método de Pago Seleccionado</label>
+                                <select class="form-select rs-form-control" th:field="*{metodoPago}" required>
                                     <option value="" disabled selected>Seleccione forma de pago...</option>
                                     <option value="PSE">PSE - Débito en Línea</option>
                                     <option value="Transferencia Bancaria">Transferencia Bancaria (Bancolombia / Nequi / Daviplata)</option>
@@ -111,16 +105,18 @@
                             </div>
                         </div>
 
-                        <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
-                            <i class="bi bi-info-circle-fill fs-4 me-3"></i>
-                            <div class="small">
-                                <strong>Regla de Negocio del PMV:</strong> Al enviar el formulario, el aspirante queda automáticamente registrado en la base de datos con rol de <em>"Alumno Activo"</em> y se genera su primer comprobante de pago sin necesidad de intervención manual.
+                        <div class="p-3 rounded-3 mb-4" style="background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.3);">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-info-circle-fill fs-4 text-info me-3"></i>
+                                <div class="small text-light">
+                                    <strong>Regla de Negocio del Sistema:</strong> Al enviar el formulario, el aspirante queda automáticamente registrado en el directorio como <em>"Alumno Activo"</em> y se genera su primer comprobante de pago sin necesidad de intervención manual.
+                                </div>
                             </div>
                         </div>
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a th:href="@{/}" class="btn btn-outline-secondary px-4 me-md-2">Cancelar</a>
-                            <button type="submit" class="btn btn-primary btn-lg px-5 fw-bold shadow-sm">
+                        <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
+                            <a th:href="@{/}" class="btn btn-rs-outline px-4">Cancelar</a>
+                            <button type="submit" class="btn btn-rs-primary px-5">
                                 <i class="bi bi-check-circle-fill me-2"></i>Completar Inscripción Inmediata
                             </button>
                         </div>

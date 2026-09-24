@@ -1,66 +1,122 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - Roller Speed PMV</title>
+    <title>Roller Speed - Escuela de Patinaje Santa Marta</title>
+    <!-- Bootstrap 5.3 & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom Esports Roller Speed Stylesheet -->
+    <link rel="stylesheet" th:href="@{/css/rollerspeed.css}" href="/css/rollerspeed.css">
     <style>
-        .hero { background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%); color: white; padding: 4rem 0; }
-        .feature-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border-radius: 12px; }
-        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.12); }
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(90deg, rgba(8, 9, 13, 0.96) 0%, rgba(8, 9, 13, 0.88) 45%, rgba(8, 9, 13, 0.45) 100%),
+                        url('/images/hero-skater.jpg') no-repeat center right / cover;
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 30, 39, 0.3);
+        }
+        @media (max-width: 991px) {
+            .hero-banner {
+                background: linear-gradient(180deg, rgba(8, 9, 13, 0.97) 0%, rgba(8, 9, 13, 0.92) 100%),
+                            url('/images/hero-skater.jpg') no-repeat center / cover;
+                padding: 3rem 0;
+            }
+        }
     </style>
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
+    <!-- NAVBAR COMPONENT -->
     <div th:replace="~{fragments/navbar :: menu}"></div>
 
-    <section class="hero text-center text-md-start">
-        <div class="container">
-            <div class="row align-items-center">
+    <!-- HERO SECTION (MATCHING USER MOCKUP) -->
+    <section class="hero-banner">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <!-- HERO LEFT COLUMN: TITLES & ACTIONS -->
                 <div class="col-lg-7">
-                    <span class="badge bg-warning text-dark fw-bold px-3 py-2 mb-3 text-uppercase">
-                        <i class="bi bi-speedometer2 me-1"></i>Producto Mínimo Viable (EA2)
-                    </span>
-                    <h1 class="display-4 fw-bold mb-3">Escuela de Patinaje <span class="text-warning">Roller Speed</span></h1>
-                    <p class="lead text-white-50 mb-4">
-                        Plataforma web integral para la gestión automatizada de inscripciones, control de alumnos, horarios de clases y recaudo de mensualidades en Santa Marta.
+                    <div class="mb-3">
+                        <span class="rs-badge-tag">
+                            <i class="bi bi-speedometer2"></i> PRODUCTO MÍNIMO VIABLE (EA2 / EA3)
+                        </span>
+                    </div>
+                    <h1 class="rs-hero-title mb-3">
+                        ESCUELA DE PATINAJE<br>
+                        <span class="text-red">ROLLER SPEED</span>
+                    </h1>
+                    <p class="text-secondary fs-5 mb-4 pe-lg-4" style="line-height: 1.6;">
+                        Plataforma web integral para la gestión automatizada de inscripciones, control de alumnos,
+                        horarios de clases y recaudo de mensualidades en Santa Marta.
                     </p>
-                    <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
-                        <a th:href="@{/inscripcion}" class="btn btn-warning btn-lg fw-bold px-4 text-dark shadow">
-                            <i class="bi bi-person-plus-fill me-2"></i>Inscribirme en Línea
+                    <div class="d-flex flex-wrap gap-3">
+                        <a th:href="@{/inscripcion}" class="btn btn-rs-primary d-flex align-items-center gap-2">
+                            <i class="bi bi-person-fill-add fs-5"></i>
+                            <span>Inscribirme en Línea</span>
                         </a>
-                        <a th:href="@{/clases}" class="btn btn-outline-light btn-lg px-4">
-                            <i class="bi bi-calendar-week me-2"></i>Consultar Horarios
+                        <a th:href="@{/clases}" class="btn btn-rs-outline d-flex align-items-center gap-2">
+                            <i class="bi bi-calendar3"></i>
+                            <span>Consultar Horarios</span>
+                        </a>
+                        <a th:href="@{/swagger-ui/index.html}" target="_blank" class="btn btn-rs-swagger d-flex align-items-center gap-2">
+                            <i class="bi bi-file-code-fill"></i>
+                            <span>Swagger API</span>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-5 text-center mt-4 mt-lg-0">
-                    <div class="p-4 bg-dark bg-opacity-50 rounded-4 border border-secondary shadow-lg">
-                        <h5 class="text-warning fw-bold mb-3"><i class="bi bi-bar-chart-line me-2"></i>Métricas del PMV</h5>
-                        <div class="row g-2 text-center">
+
+                <!-- HERO RIGHT COLUMN: METRICS PANEL (MATCHING MOCKUP) -->
+                <div class="col-lg-5">
+                    <div class="rs-metrics-panel">
+                        <div class="rs-metrics-panel-header">
+                            <i class="bi bi-bar-chart-fill"></i>
+                            <span>MÉTRICAS DEL SISTEMA</span>
+                        </div>
+                        <div class="row g-3">
                             <div class="col-6">
-                                <div class="bg-dark p-3 rounded border border-secondary">
-                                    <h2 class="fw-bold text-warning mb-0" th:text="${totalAlumnos}">5</h2>
-                                    <small class="text-muted">Alumnos Activos</small>
+                                <div class="rs-metric-box">
+                                    <div class="rs-metric-icon bg-danger bg-opacity-25 text-danger">
+                                        <i class="bi bi-people-fill"></i>
+                                    </div>
+                                    <div>
+                                        <div class="rs-metric-val text-danger" th:text="${totalAlumnos}">5</div>
+                                        <div class="rs-metric-label">Alumnos registrados</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="bg-dark p-3 rounded border border-secondary">
-                                    <h2 class="fw-bold text-info mb-0" th:text="${totalInstructores}">4</h2>
-                                    <small class="text-muted">Instructores</small>
+                                <div class="rs-metric-box">
+                                    <div class="rs-metric-icon bg-danger bg-opacity-25 text-danger">
+                                        <i class="bi bi-calendar-event-fill"></i>
+                                    </div>
+                                    <div>
+                                        <div class="rs-metric-val text-danger" th:text="${totalClases}">5</div>
+                                        <div class="rs-metric-label">Clases activas</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="bg-dark p-3 rounded border border-secondary">
-                                    <h2 class="fw-bold text-success mb-0" th:text="${totalClases}">5</h2>
-                                    <small class="text-muted">Clases Activas</small>
+                                <div class="rs-metric-box">
+                                    <div class="rs-metric-icon bg-success bg-opacity-25 text-success">
+                                        <i class="bi bi-clock-fill"></i>
+                                    </div>
+                                    <div>
+                                        <div class="rs-metric-val text-success">5</div>
+                                        <div class="rs-metric-label">Horarios disponibles</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="bg-dark p-3 rounded border border-secondary">
-                                    <h2 class="fw-bold text-primary mb-0">100%</h2>
-                                    <small class="text-muted">Registro Autónomo</small>
+                                <div class="rs-metric-box">
+                                    <div class="rs-metric-icon bg-info bg-opacity-25 text-info">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div>
+                                        <div class="rs-metric-val text-info">100%</div>
+                                        <div class="rs-metric-label">Sistema operativo</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -70,107 +126,127 @@
         </div>
     </section>
 
-    <div class="container my-5 flex-grow-1">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold text-primary">Módulos Operacionales del Sistema</h2>
-            <p class="text-muted">Acceso directo a las diferentes opciones del menú implementadas con el patrón MVC.</p>
-        </div>
-
-        <div class="row g-4 mb-5">
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 feature-card border-0 shadow-sm p-3">
-                    <div class="card-body text-center">
-                        <div class="bg-primary text-white rounded-circle p-3 d-inline-block mb-3">
-                            <i class="bi bi-person-fill-add fs-3"></i>
-                        </div>
-                        <h5 class="fw-bold">Inscripción en Línea</h5>
-                        <p class="text-muted small">Registro directo para aspirantes sin validación manual del administrador.</p>
-                        <a th:href="@{/inscripcion}" class="btn btn-outline-primary btn-sm w-100">Abrir Formulario</a>
-                    </div>
-                </div>
+    <!-- OPERATIONAL MODULES SECTION (MATCHING THE 4 CARDS IN MOCKUP) -->
+    <section class="py-5">
+        <div class="container my-2">
+            <div class="text-center mb-5">
+                <h2 class="display-6 fw-bold mb-2">
+                    <span class="text-danger fst-italic">Módulos</span>
+                    <span class="text-white">Operacionales del Sistema</span>
+                </h2>
+                <p class="text-muted fs-6">
+                    Acceso directo a las diferentes opciones del menú implementadas con el patrón MVC y API REST.
+                </p>
             </div>
 
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 feature-card border-0 shadow-sm p-3">
-                    <div class="card-body text-center">
-                        <div class="bg-success text-white rounded-circle p-3 d-inline-block mb-3">
-                            <i class="bi bi-people-fill fs-3"></i>
-                        </div>
-                        <h5 class="fw-bold">Gestión de Alumnos</h5>
-                        <p class="text-muted small">Directorio con listado dinámico, niveles deportivos y seguimiento.</p>
-                        <a th:href="@{/alumnos}" class="btn btn-outline-success btn-sm w-100">Ver Directorio</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 feature-card border-0 shadow-sm p-3">
-                    <div class="card-body text-center">
-                        <div class="bg-warning text-dark rounded-circle p-3 d-inline-block mb-3">
-                            <i class="bi bi-award-fill fs-3"></i>
-                        </div>
-                        <h5 class="fw-bold">Cuerpo Técnico</h5>
-                        <p class="text-muted small">Perfiles de instructores, especialidades asignadas y horarios.</p>
-                        <a th:href="@{/instructores}" class="btn btn-outline-warning text-dark btn-sm w-100">Ver Instructores</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 feature-card border-0 shadow-sm p-3">
-                    <div class="card-body text-center">
-                        <div class="bg-danger text-white rounded-circle p-3 d-inline-block mb-3">
-                            <i class="bi bi-cash-stack fs-3"></i>
-                        </div>
-                        <h5 class="fw-bold">Módulo de Pagos</h5>
-                        <p class="text-muted small">Comprobantes, pasarelas de pago y balance financiero del club.</p>
-                        <a th:href="@{/pagos}" class="btn btn-outline-danger btn-sm w-100">Consultar Pagos</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-sm h-100 p-4">
-                    <h4 class="fw-bold text-dark mb-3"><i class="bi bi-stars text-warning me-2"></i>Nuestros Servicios Destacados</h4>
-                    <div class="list-group list-group-flush">
-                        <div class="list-group-item px-0 py-3" th:each="s : ${serviciosDestacados}">
-                            <div class="d-flex w-100 justify-content-between align-items-center">
-                                <h6 class="mb-1 fw-bold text-primary" th:text="${s.nombre}">Servicio</h6>
-                                <span class="badge bg-light text-dark border" th:text="'$' + ${#numbers.formatDecimal(s.tarifaMensual, 0, 'POINT', 0, 'COMMA')} + '/mes'">Tarifa</span>
+            <div class="row g-4">
+                <!-- CARD 1: ALUMNOS (RED THEME) -->
+                <div class="col-md-6 col-lg-3">
+                    <a th:href="@{/alumnos}" class="rs-module-card theme-red">
+                        <div>
+                            <div class="rs-module-icon-circle bg-danger bg-opacity-25 text-danger">
+                                <i class="bi bi-person-fill"></i>
                             </div>
-                            <p class="mb-1 text-muted small" th:text="${s.descripcion}">Descripción</p>
+                            <h3 class="rs-module-title">Alumnos</h3>
+                            <p class="rs-module-desc">
+                                Gestiona la información, niveles formativos y seguimiento continuo de tus alumnos.
+                            </p>
                         </div>
-                    </div>
-                    <div class="mt-3">
-                        <a th:href="@{/servicios}" class="btn btn-sm btn-link p-0 text-decoration-none">Ver todos los servicios &rarr;</a>
-                    </div>
+                        <div class="rs-module-arrow text-danger">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- CARD 2: CLASES Y HORARIOS (BLUE THEME) -->
+                <div class="col-md-6 col-lg-3">
+                    <a th:href="@{/clases}" class="rs-module-card theme-blue">
+                        <div>
+                            <div class="rs-module-icon-circle bg-info bg-opacity-25 text-info">
+                                <i class="bi bi-calendar3"></i>
+                            </div>
+                            <h3 class="rs-module-title">Clases y Horarios</h3>
+                            <p class="rs-module-desc">
+                                Consulta y organiza las clases disponibles, pistas asignadas y cálculo dinámico de cupos.
+                            </p>
+                        </div>
+                        <div class="rs-module-arrow text-info">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- CARD 3: PAGOS (GOLD THEME) -->
+                <div class="col-md-6 col-lg-3">
+                    <a th:href="@{/pagos}" class="rs-module-card theme-gold">
+                        <div>
+                            <div class="rs-module-icon-circle bg-warning bg-opacity-25 text-warning">
+                                <i class="bi bi-credit-card-2-front-fill"></i>
+                            </div>
+                            <h3 class="rs-module-title">Pagos</h3>
+                            <p class="rs-module-desc">
+                                Controla las mensualidades, matrículas y el balance financiero general de recaudos.
+                            </p>
+                        </div>
+                        <div class="rs-module-arrow text-warning">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- CARD 4: SERVICIOS (PURPLE THEME) -->
+                <div class="col-md-6 col-lg-3">
+                    <a th:href="@{/servicios}" class="rs-module-card theme-purple">
+                        <div>
+                            <div class="rs-module-icon-circle bg-primary bg-opacity-25 text-primary" style="color: #a855f7 !important;">
+                                <i class="bi bi-gear-fill"></i>
+                            </div>
+                            <h3 class="rs-module-title">Servicios</h3>
+                            <p class="rs-module-desc">
+                                Accede a todos nuestros servicios formativos, planes de entrenamiento y beneficios.
+                            </p>
+                        </div>
+                        <div class="rs-module-arrow" style="color: #a855f7;">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-sm h-100 p-4">
-                    <h4 class="fw-bold text-dark mb-3"><i class="bi bi-calendar-event-fill text-danger me-2"></i>Próximos Eventos y Válidas</h4>
-                    <div class="list-group list-group-flush">
-                        <div class="list-group-item px-0 py-3" th:each="e : ${proximosEventos}">
-                            <div class="d-flex w-100 justify-content-between align-items-center">
-                                <h6 class="mb-1 fw-bold text-dark" th:text="${e.titulo}">Evento</h6>
-                                <span class="badge bg-success" th:text="${e.estado}">Confirmado</span>
-                            </div>
-                            <p class="mb-1 text-muted small" th:text="${e.descripcion}">Descripción</p>
-                            <small class="text-secondary"><i class="bi bi-geo-alt me-1"></i><span th:text="${e.lugar}"></span> | <span th:text="${e.fecha}"></span></small>
-                        </div>
+    <!-- REST API DOCUMENTATION BANNER (EA3 HIGHLIGHT) -->
+    <section class="py-4 mb-5">
+        <div class="container">
+            <div class="p-4 rounded-4 border border-secondary" style="background: linear-gradient(135deg, #10141e 0%, #151c2a 100%);">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <span class="badge bg-warning text-dark fw-bold px-3 py-1 mb-2">EVIDENCIA DE APRENDIZAJE 3 (EA3)</span>
+                        <h3 class="text-white fw-bold mb-2 brand-font">DOCUMENTACIÓN DE LA API REST CON SWAGGER / OPENAPI 3.0</h3>
+                        <p class="text-muted mb-0 small">
+                            La aplicación cuenta con <strong>19 endpoints RESTful</strong> completamente documentados en tiempo real con 
+                            <code>springdoc-openapi</code> v2.6.0. Explora los esquemas de datos, parámetros y prueba las respuestas HTTP directamente en Swagger UI.
+                        </p>
                     </div>
-                    <div class="mt-3">
-                        <a th:href="@{/eventos}" class="btn btn-sm btn-link p-0 text-decoration-none">Ver calendario completo &rarr;</a>
+                    <div class="col-lg-4 text-lg-end">
+                        <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+                            <a th:href="@{/swagger-ui/index.html}" target="_blank" class="btn btn-rs-swagger">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>Abrir Swagger UI
+                            </a>
+                            <a th:href="@{/v3/api-docs}" target="_blank" class="btn btn-outline-secondary btn-sm text-light">
+                                <i class="bi bi-code-slash me-1"></i>OpenAPI JSON
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- FOOTER COMPONENT -->
     <div th:replace="~{fragments/footer :: pie}"></div>
+
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

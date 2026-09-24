@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -6,85 +6,92 @@
     <title>Gestión de Pagos - Roller Speed</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/rollerspeed.css}" href="/css/rollerspeed.css">
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
     <div th:replace="~{fragments/navbar :: menu}"></div>
 
     <div class="container my-5 flex-grow-1">
-        <div class="mb-4 pb-2 border-bottom">
-            <h2 class="fw-bold text-primary mb-1">
-                <i class="bi bi-wallet2 me-2"></i>Módulo de Gestión Financiera y Pagos
+        <div class="mb-4 pb-3 border-bottom" style="border-color: var(--rs-border-dark) !important;">
+            <span class="badge bg-warning bg-opacity-25 text-warning px-3 py-1 mb-2 font-monospace">MÓDULO FINANCIERO (MVC + REST)</span>
+            <h2 class="fw-bold text-white mb-1 brand-font">
+                <i class="bi bi-wallet2 text-danger me-2"></i>GESTIÓN FINANCIERA Y CONTROL DE PAGOS
             </h2>
-            <p class="text-muted mb-0">Control de mensualidades, recaudos automatizados por pasarela y pagos en taquilla.</p>
+            <p class="text-muted mb-0 small">Control de mensualidades, recaudos automatizados por pasarela PSE y comprobantes de caja.</p>
         </div>
 
         <div class="row g-3 mb-4">
             <div class="col-md-6">
-                <div class="card bg-primary text-white border-0 shadow-sm p-3">
+                <div class="rs-card p-4" style="border-left: 4px solid #10b981;">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <p class="text-white-50 text-uppercase small mb-1 fw-bold">Total Recaudado en Línea</p>
-                            <h3 class="fw-bold mb-0" th:text="'$ ' + ${#numbers.formatDecimal(totalRecaudado, 0, 'POINT', 0, 'COMMA')} + ' COP'">$ 0 COP</h3>
+                            <p class="text-muted text-uppercase small mb-1 fw-bold">Total Recaudado en Línea</p>
+                            <h3 class="fw-bold text-white mb-0 brand-font fs-2" th:text="'$ ' + ${#numbers.formatDecimal(totalRecaudado, 0, 'POINT', 0, 'COMMA')} + ' COP'">$ 0 COP</h3>
                         </div>
-                        <i class="bi bi-cash-coin fs-1 text-warning"></i>
+                        <div class="rounded-circle p-3 bg-success bg-opacity-25 text-success">
+                            <i class="bi bi-cash-coin fs-2"></i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card bg-warning text-dark border-0 shadow-sm p-3">
+                <div class="rs-card p-4" style="border-left: 4px solid #f59e0b;">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <p class="text-dark-50 text-uppercase small mb-1 fw-bold">Mensualidades Pendientes</p>
-                            <h3 class="fw-bold mb-0" th:text="${pagosPendientes} + ' alumnos'">0</h3>
+                            <p class="text-muted text-uppercase small mb-1 fw-bold">Mensualidades Pendientes</p>
+                            <h3 class="fw-bold text-warning mb-0 brand-font fs-2" th:text="${pagosPendientes} + ' alumnos'">0</h3>
                         </div>
-                        <i class="bi bi-exclamation-triangle-fill fs-1 text-danger"></i>
+                        <div class="rounded-circle p-3 bg-warning bg-opacity-25 text-warning">
+                            <i class="bi bi-exclamation-triangle-fill fs-2"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card shadow-sm border-0">
-            <div class="card-header bg-dark text-white fw-bold py-3">
-                <i class="bi bi-receipt me-2"></i>Historial de Transacciones y Comprobantes
+        <div class="rs-card overflow-hidden">
+            <div class="rs-card-header d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-white fs-5 brand-font">
+                    <i class="bi bi-receipt text-danger me-2"></i>Historial de Transacciones y Comprobantes
+                </span>
+                <span class="badge bg-dark border border-secondary text-info">Actualizado en tiempo real</span>
             </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="table-secondary">
-                            <tr>
-                                <th scope="col" class="ps-3">Comprobante</th>
-                                <th scope="col">Alumno</th>
-                                <th scope="col">Documento</th>
-                                <th scope="col">Concepto</th>
-                                <th scope="col">Método de Pago</th>
-                                <th scope="col">Monto (COP)</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col" class="pe-3">Fecha</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="pago : ${pagos}">
-                                <td class="ps-3 fw-bold text-primary" th:text="${pago.referencia}">REF-001</td>
-                                <td class="fw-semibold text-dark" th:text="${pago.alumnoNombre}">Mariana Pacheco</td>
-                                <td class="text-muted small" th:text="${pago.documento}">1082938471</td>
-                                <td th:text="${pago.concepto}">Matrícula</td>
-                                <td>
-                                    <span class="badge bg-light text-dark border" th:text="${pago.metodoPago}">PSE</span>
-                                </td>
-                                <td class="fw-bold" th:text="'$' + ${#numbers.formatDecimal(pago.monto, 0, 'POINT', 0, 'COMMA')}">$ 120,000</td>
-                                <td>
-                                    <span th:if="${pago.estado == 'Pagado'}" class="badge bg-success">
-                                        <i class="bi bi-check-circle me-1"></i>Pagado
-                                    </span>
-                                    <span th:if="${pago.estado == 'Pendiente'}" class="badge bg-warning text-dark">
-                                        <i class="bi bi-clock me-1"></i>Pendiente
-                                    </span>
-                                </td>
-                                <td class="pe-3 text-muted small" th:text="${pago.fecha}">2026-09-15</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table class="table rs-table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ps-3">Comprobante</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Concepto</th>
+                            <th scope="col">Método de Pago</th>
+                            <th scope="col">Monto (COP)</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col" class="pe-3">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="p : ${pagos}">
+                            <td class="ps-3 font-monospace text-light fw-bold" th:text="${p.codigoComprobante}">AUT-12345</td>
+                            <td class="fw-semibold text-white" th:text="${p.alumnoNombre}">Mariana Pacheco</td>
+                            <td class="text-muted font-monospace" th:text="${p.alumnoDocumento}">1082938471</td>
+                            <td class="text-secondary small" th:text="${p.concepto}">Inscripción en línea</td>
+                            <td>
+                                <span class="badge bg-dark border border-secondary text-light" th:text="${p.metodoPago}">PSE</span>
+                            </td>
+                            <td class="fw-bold text-white font-monospace" th:text="'$' + ${#numbers.formatDecimal(p.monto, 0, 'POINT', 0, 'COMMA')}">$ 120,000</td>
+                            <td>
+                                <span th:if="${p.estado == 'Pagado'}" class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25">
+                                    <i class="bi bi-check-circle-fill me-1"></i>Pagado
+                                </span>
+                                <span th:if="${p.estado == 'Pendiente'}" class="badge bg-warning bg-opacity-25 text-warning border border-warning border-opacity-25">
+                                    <i class="bi bi-hourglass-split me-1"></i>Pendiente
+                                </span>
+                            </td>
+                            <td class="pe-3 font-monospace text-muted small" th:text="${p.fechaPago}">2026-09-20</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

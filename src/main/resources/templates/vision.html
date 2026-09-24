@@ -1,37 +1,38 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visión Institucional - Roller Speed</title>
+    <title>Visión Estratégica 2030 - Roller Speed</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/rollerspeed.css}" href="/css/rollerspeed.css">
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
     <div th:replace="~{fragments/navbar :: menu}"></div>
 
     <div class="container my-5 flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card shadow-sm border-0 p-4 p-md-5 bg-white">
+                <div class="rs-card p-4 p-md-5" style="border: 2px solid rgba(14, 165, 233, 0.35);">
                     <div class="text-center mb-4">
-                        <div class="bg-success text-white rounded-circle p-3 d-inline-block mb-3">
-                            <i class="bi bi-eye-fill fs-2"></i>
+                        <div class="rounded-circle p-3 d-inline-block mb-3" style="background: rgba(14, 165, 233, 0.15); border: 2px solid var(--rs-blue-accent);">
+                            <i class="bi bi-eye-fill fs-2 text-info"></i>
                         </div>
-                        <h2 class="fw-bold text-success">Visión Institucional</h2>
-                        <h6 class="text-muted text-uppercase">Horizonte Estratégico 2030</h6>
+                        <h2 class="fw-bold text-white brand-font">VISIÓN ESTRATÉGICA 2030</h2>
+                        <h6 class="text-info text-uppercase font-monospace small">Proyección y Liderazgo Deportivo</h6>
                     </div>
-                    <p class="lead text-secondary text-justify mb-4" style="line-height: 1.8;">
-                        Consolidarnos para el año 2030 como la escuela de patinaje líder y referente en Colombia por la calidad pedagógica de sus programas,
-                        el alto rendimiento de sus deportistas en los podios nacionales y su liderazgo tecnológico en la digitalización de procesos deportivos,
-                        consolidando un modelo autosostenible y formador de líderes comunitarios.
+                    <p class="lead text-light mb-4 text-center" style="line-height: 1.8;">
+                        Para el año 2030, ser reconocidos como el club y semillero de patinaje de velocidad líder en la costa norte colombiana,
+                        distinguiéndonos por la formación de deportistas de alto rendimiento, la implementación de tecnología de punta en el seguimiento
+                        atlético y la consolidación de eventos deportivos que posicionen a Santa Marta como capital del patinaje de carreras.
                     </p>
-                    <div class="p-3 bg-light rounded-3 border">
-                        <h6 class="fw-bold text-dark mb-2"><i class="bi bi-compass text-success me-2"></i>Metas de Futuro:</h6>
-                        <ul class="list-unstyled small text-muted mb-0">
-                            <li><i class="bi bi-check2 text-success me-1"></i>Más de 500 atletas federados en categorías menores y juvenil.</li>
-                            <li><i class="bi bi-check2 text-success me-1"></i>Pista de entrenamiento con estándares mundiales en Santa Marta.</li>
-                            <li><i class="bi bi-check2 text-success me-1"></i>100% de la gestión administrativa y deportiva automatizada.</li>
+                    <div class="p-3 rounded-3 border border-secondary border-opacity-25" style="background: rgba(8, 10, 15, 0.8);">
+                        <h6 class="fw-bold text-white mb-2 brand-font"><i class="bi bi-trophy text-info me-2"></i>Metas de Impacto:</h6>
+                        <ul class="text-muted small mb-0 ps-3">
+                            <li class="mb-1">Alcanzar más de 500 patinadores activos formados bajo metodología federada.</li>
+                            <li class="mb-1">Aportar atletas medallistas a la Selección Colombia de Carreras.</li>
+                            <li>Operar una infraestructura 100% digitalizada para padres, atletas y jueces.</li>
                         </ul>
                     </div>
                 </div>

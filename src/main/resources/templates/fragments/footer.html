@@ -1,40 +1,50 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <footer th:fragment="pie" class="bg-dark text-white pt-4 pb-3 mt-5 border-top border-secondary">
+    <footer th:fragment="pie" class="rs-footer">
         <div class="container">
             <div class="row g-4">
-                <div class="col-md-5">
-                    <h5 class="text-warning fw-bold mb-3">&#9889; Escuela de Patinaje Roller Speed</h5>
-                    <p class="text-secondary small mb-2">
+                <div class="col-lg-5 col-md-6">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="Logo" style="height: 36px;">
+                        <h5 class="fw-bold text-white mb-0 brand-font">ESCUELA DE PATINAJE ROLLER SPEED</h5>
+                    </div>
+                    <p class="text-muted small mb-3">
                         Formando campeones sobre ruedas en Santa Marta, Colombia. Desarrollamos disciplina deportiva,
                         técnica de velocidad y valores humanos en niños, jóvenes y adultos.
                     </p>
-                    <p class="text-secondary small">
-                        <strong>Sede Principal:</strong> Complejo Deportivo Bolivariano, Santa Marta, Magdalena.
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i><strong>Sede Principal:</strong> Complejo Deportivo Bolivariano, Santa Marta, Magdalena.
                     </p>
                 </div>
-                <div class="col-md-3">
-                    <h6 class="text-uppercase fw-bold text-light mb-3">Módulos del PMV</h6>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-uppercase fw-bold text-white mb-3 brand-font">Módulos del Sistema</h6>
                     <ul class="list-unstyled small">
-                        <li><a th:href="@{/inscripcion}" class="text-secondary text-decoration-none hover-white">Inscripción en Línea</a></li>
-                        <li><a th:href="@{/alumnos}" class="text-secondary text-decoration-none">Gestión de Alumnos</a></li>
-                        <li><a th:href="@{/instructores}" class="text-secondary text-decoration-none">Cuerpo Técnico</a></li>
-                        <li><a th:href="@{/clases}" class="text-secondary text-decoration-none">Programación de Clases</a></li>
-                        <li><a th:href="@{/pagos}" class="text-secondary text-decoration-none">Control de Mensualidades</a></li>
+                        <li class="mb-2"><a th:href="@{/inscripcion}" class="text-muted text-decoration-none hover-white"><i class="bi bi-chevron-right text-danger me-1"></i>Inscripción en Línea</a></li>
+                        <li class="mb-2"><a th:href="@{/alumnos}" class="text-muted text-decoration-none"><i class="bi bi-chevron-right text-danger me-1"></i>Gestión de Alumnos</a></li>
+                        <li class="mb-2"><a th:href="@{/clases}" class="text-muted text-decoration-none"><i class="bi bi-chevron-right text-danger me-1"></i>Clases y Cupos</a></li>
+                        <li class="mb-2"><a th:href="@{/instructores}" class="text-muted text-decoration-none"><i class="bi bi-chevron-right text-danger me-1"></i>Cuerpo Técnico</a></li>
+                        <li class="mb-2"><a th:href="@{/pagos}" class="text-muted text-decoration-none"><i class="bi bi-chevron-right text-danger me-1"></i>Control de Pagos</a></li>
+                        <li><a th:href="@{/swagger-ui/index.html}" target="_blank" class="text-warning text-decoration-none fw-bold"><i class="bi bi-box-arrow-up-right me-1"></i>Swagger UI / API REST</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <h6 class="text-uppercase fw-bold text-light mb-3">Información Académica</h6>
-                    <p class="small text-secondary mb-1"><strong>Asignatura:</strong> Frameworks (Unidad 2 - MVC y Thymeleaf)</p>
-                    <p class="small text-secondary mb-1"><strong>Institución:</strong> IU Digital de Antioquia</p>
-                    <p class="small text-secondary mb-1"><strong>Estudiante:</strong> Adrianys Saumeth</p>
-                    <p class="small text-secondary"><strong>Arquitectura:</strong> Spring Boot 3.3.3 + Thymeleaf + MVC</p>
+                <div class="col-lg-4 col-md-12">
+                    <h6 class="text-uppercase fw-bold text-white mb-3 brand-font">Información Académica (EA3)</h6>
+                    <p class="small text-muted mb-1"><strong>Asignatura:</strong> Frameworks (Unidad 3 - Documentación API REST)</p>
+                    <p class="small text-muted mb-1"><strong>Institución:</strong> IU Digital de Antioquia</p>
+                    <p class="small text-muted mb-1"><strong>Integrantes:</strong> Adrianys Saumeth & Simón Cano Rojas</p>
+                    <p class="small text-muted mb-2"><strong>Stack:</strong> Spring Boot 3.3.3 + Springdoc OpenAPI 2.6.0 + Thymeleaf</p>
+                    <a th:href="@{/v3/api-docs}" target="_blank" class="badge bg-dark border border-secondary text-info text-decoration-none py-2 px-3">
+                        <i class="bi bi-file-earmark-code me-1"></i>OpenAPI 3.0 JSON Spec
+                    </a>
                 </div>
             </div>
-            <hr class="border-secondary my-3"/>
-            <div class="text-center small text-secondary">
-                &copy; 2026 Roller Speed Santa Marta. Todos los derechos reservados. Evidencia de Aprendizaje 2 (EA2) - PMV.
+            <hr class="border-secondary my-4"/>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-muted">
+                <div>&copy; 2026 Escuela de Patinaje Roller Speed - Santa Marta. Todos los derechos reservados.</div>
+                <div class="mt-2 mt-md-0">
+                    <span class="badge bg-danger">EA3: Monolito + RESTful API</span>
+                </div>
             </div>
         </div>
     </footer>
