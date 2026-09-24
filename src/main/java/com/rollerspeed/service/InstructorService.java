@@ -21,4 +21,8 @@ public class InstructorService {
     public List<Instructor> obtenerTodos() {
         return Collections.unmodifiableList(instructores);
     }
+
+    public java.util.Optional<Instructor> obtenerPorId(Long id) {
+        return instructores.stream().filter(i -> i.getId().equals(id)).findFirst();
+    }
 }

@@ -22,4 +22,17 @@ public class ClaseService {
     public List<Clase> obtenerTodas() {
         return Collections.unmodifiableList(clases);
     }
+
+    public java.util.Optional<Clase> obtenerPorId(Long id) {
+        return clases.stream().filter(c -> c.getId().equals(id)).findFirst();
+    }
+
+    public synchronized Clase registrarClase(Clase clase) {
+        if (clase.getId() == null) {
+            long nuevoId = clases.stream().mapToLong(Clase::getId).max().orElse(0) + 1;
+            clase.setId(nuevoId);
+        }
+        clases.add(clase);
+        return clase;
+    }
 }

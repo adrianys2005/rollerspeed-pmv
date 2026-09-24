@@ -61,6 +61,26 @@ public class AspiranteService {
         return aspirante;
     }
 
+    public synchronized java.util.Optional<Aspirante> obtenerPorId(Long id) {
+        return aspirantes.stream().filter(a -> a.getId().equals(id)).findFirst();
+    }
+
+    public synchronized List<Aspirante> obtenerPorNivel(String nivel) {
+        return aspirantes.stream()
+                .filter(a -> a.getNivel() != null && a.getNivel().equalsIgnoreCase(nivel))
+                .toList();
+    }
+
+    public synchronized boolean actualizarEstado(Long id, String nuevoEstado) {
+        for (Aspirante a : aspirantes) {
+            if (a.getId().equals(id)) {
+                a.setEstado(nuevoEstado);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public synchronized long contarAlumnos() {
         return aspirantes.size();
     }

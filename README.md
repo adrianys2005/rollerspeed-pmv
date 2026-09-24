@@ -1,118 +1,90 @@
-﻿# 🛼 Escuela de Patinaje "Roller Speed" - Santa Marta, Colombia
-## Producto Mínimo Viable (PMV) - Evidencia de Aprendizaje 2 (EA2)
+# 🛼 Escuela de Patinaje "Roller Speed" - Santa Marta, Colombia
+## Evidencia de Aprendizaje 3 (EA3) - Documentación de la API REST con Swagger / OpenAPI
 
 **Institución Universitaria Digital de Antioquia (IU Digital)**  
 **Facultad de Ingeniería – Tecnología en Desarrollo de Software**  
 **Asignatura:** Frameworks  
-**Unidad 2:** Arquitectura MVC y Motor de Plantillas Thymeleaf  
+**Unidad 3:** Documentación y Consumo de APIs RESTful en Aplicaciones Monolíticas  
+**Tecnologías:** Spring Boot 3.3.3, Java 17/21, Springdoc OpenAPI 2.6.0 (Swagger UI), Thymeleaf, Bootstrap 5.  
 
 ---
 
-## 👥 1. Conformación del Grupo de Trabajo y Roles
+## 👥 1. Conformación del Grupo de Trabajo y Roles Técnicos (EA3)
 
-| Integrante | Rol en el Proyecto | Responsabilidades Principales |
+En cumplimiento de los criterios de evaluación y el trabajo colaborativo en equipos de 3 estudiantes:
+
+| Integrante | Rol en el Proyecto | Responsabilidades Técnicas y Entregables |
 | :--- | :--- | :--- |
-| **Adrianys Saumeth** | **Líder de Proyecto & Desarrollador Backend MVC** | Diseño de arquitectura, implementación de clases controladoras (`@Controller`), capa de servicios (`@Service`), modelos de dominio y gestión del repositorio Git. |
-| **Equipo Colaborativo** | **Especialista Frontend & Motor Thymeleaf** | Maquetación responsiva con Bootstrap 5, diseño de vistas dinámicas con directivas Thymeleaf (`th:each`, `th:object`, `th:field`, `th:replace`). |
-| **Equipo Colaborativo** | **Aseguramiento de Calidad & GitOps** | Pruebas de integración de formularios, validación de endpoints HTTP y documentación técnica. |
+| **Adrianys Saumeth** | **Líder Técnico & Desarrollador Backend REST** | • Arquitectura de la API REST y configuración de Springdoc OpenAPI 3.0 (`OpenApiConfig`).<br>• Implementación de `@RestController` para Aspirantes, Alumnos y Pagos.<br>• Mapeo de códigos de respuesta HTTP (200, 201, 400, 404) y administración de Git. |
+| **Simón Cano Rojas** | **Ingeniero de Integración & Documentador OpenAPI** | • Enriquecimiento semántico de la documentación con `@Tag`, `@Operation`, `@Parameter` y `@Schema`.<br>• Implementación de `@RestController` para Clases, Instructores y Asistencia.<br>• Pruebas de contrato y validación de interoperabilidad desde Swagger UI. |
+| **Tercer Integrante Colaborativo** *(o asignado por grupo)* | **Especialista de Calidad (QA) & Documentación** | • Pruebas automatizadas de endpoints REST mediante herramientas HTTP / curl.<br>• Verificación de esquemas JSON en `/v3/api-docs` y validación de flujos CRUD.<br>• Redacción del informe técnico formal y estructuración del video demostrativo. |
 
 ---
 
-## 🚀 2. Descripción del Caso de Estudio
+## 📋 2. Contexto y Objetivos del Proyecto
 
-La escuela de patinaje **"Roller Speed"** en Santa Marta, Colombia, requería superar procesos manuales que generaban demoras y errores en la inscripción, control de mensualidades y asignación de clases.
+La escuela **"Roller Speed"** (Santa Marta) opera bajo un modelo de arquitectura monolítica moderna en Spring Boot que combina:
+1. **Frontend Web Monolítico (Thymeleaf):** Para la navegación web institucional y formularios de usuario.
+2. **API RESTful Documentada (Swagger / OpenAPI):** Para permitir el consumo de datos desde aplicaciones móviles de padres de familia, sistemas externos de pasarelas de pago y tableros analíticos.
 
-Para esta **Evidencia de Aprendizaje 2 (EA2)**, se consolidó el **Producto Mínimo Viable (PMV)** aplicando rigurosamente el patrón **MVC (Model-View-Controller)** en Spring Boot con **Thymeleaf**, logrando que:
-1. Los aspirantes se registren autónomamente ingresando datos personales y medio de pago sin requerir aprobación manual.
-2. Se gestione el directorio de alumnos y estado de pagos en tiempo real.
-3. Se publiquen los perfiles de los instructores y las clases con cálculo dinámico de cupos.
-4. El contenido institucional (servicios, eventos, filosofía corporativa) se renderice dinámicamente desde el backend.
-
----
-
-## 🏗️ 3. Arquitectura del Sistema (Patrón MVC)
-
-```
-rollerspeed/
-├── src/main/java/com/rollerspeed/
-│   ├── RollerspeedApplication.java
-│   ├── controller/               # Capa Controladora (Spring MVC)
-│   │   ├── HomeController.java          -> Rutas institucionales y métricas del dashboard
-│   │   ├── InscripcionController.java   -> Formulario y procesamiento de nuevos alumnos
-│   │   ├── AlumnoController.java        -> Directorio de alumnos registrados
-│   │   ├── InstructorController.java    -> Visualización del cuerpo técnico
-│   │   ├── ClaseController.java         -> Programación de clases, pistas y cupos
-│   │   └── PagoController.java          -> Control financiero y comprobantes
-│   ├── model/                    # Capa de Dominio (Modelos de Datos)
-│   │   ├── Aspirante.java               -> Entidad del aspirante/alumno
-│   │   ├── Instructor.java              -> Entidad de entrenadores
-│   │   ├── Clase.java                   -> Entidad de horarios y cupos
-│   │   ├── Pago.java                    -> Entidad de transacciones y estados
-│   │   ├── Servicio.java                -> Entidad de catálogo de servicios
-│   │   └── Evento.java                  -> Entidad de eventos y válidas
-│   └── service/                  # Capa de Negocio / Servicios
-│       ├── AspiranteService.java        -> Lógica de registro y alta automática
-│       ├── InstructorService.java       -> Catálogo del cuerpo técnico
-│       ├── ClaseService.java            -> Lógica de cupos y horarios
-│       ├── PagoService.java             -> Registro de comprobantes y totales
-│       └── InstitucionalService.java    -> Suministro de servicios y eventos
-└── src/main/resources/
-    └── templates/                # Capa de Presentación (Vistas Thymeleaf)
-        ├── fragments/
-        │   ├── navbar.html              -> Barra de navegación responsiva del PMV
-        │   └── footer.html              -> Pie de página institucional reutilizable
-        ├── index.html                   -> Dashboard principal con métricas en vivo
-        ├── inscripcion.html             -> Formulario interactivo con binding de modelo
-        ├── alumnos.html                 -> Tabla de alumnos con badges y estados
-        ├── instructores.html            -> Tarjetas de presentación del cuerpo técnico
-        ├── clases.html                  -> Grilla de horarios y barras de ocupación
-        ├── pagos.html                   -> Reporte financiero y transacciones
-        ├── servicios.html               -> Catálogo de planes con precios
-        ├── eventos.html                 -> Cronograma deportivo
-        ├── mision.html                  -> Misión corporativa
-        ├── vision.html                  -> Visión 2030
-        └── valores.html                 -> Principios corporativos
-```
+### 🎯 Objetivos de la Evidencia:
+* Integrar la librería oficial `springdoc-openapi-starter-webmvc-ui` (v2.6.0) para Spring Boot 3.
+* Documentar de forma exhaustiva los **7 módulos** del sistema: Aspirantes, Alumnos, Instructores, Clases, Pagos, Asistencia e Información Institucional.
+* Proveer una interfaz interactiva Swagger UI accesible en tiempo real para pruebas de desarrollo e integración.
 
 ---
 
-## 🌐 4. Rutas y Opciones del Menú Implementadas
+## 🌐 3. Catálogo General de Endpoints Documentados (19 Endpoints)
 
-| Opción de Menú | Ruta / Endpoint | Método HTTP | Descripción Funcional |
-| :--- | :--- | :---: | :--- |
-| **Inicio** | `/` | `GET` | Dashboard general con métricas en vivo (total alumnos, instructores, clases) y accesos directos. |
-| **Inscripción** | `/inscripcion` | `GET` / `POST` | Formulario en línea con enlace de objeto `th:object="${aspirante}"`. Al enviar vía POST, da de alta automáticamente al alumno y genera su recibo de pago. |
-| **Alumnos** | `/alumnos` | `GET` | Directorio interactivo con badges de nivel deportivo (Principiante, Intermedio, Avanzado). |
-| **Instructores** | `/instructores` | `GET` | Tarjetas dinámicas con especialidad, experiencia y horarios del cuerpo técnico. |
-| **Clases y Horarios** | `/clases` | `GET` | Programación por pistas con cálculo en tiempo real de cupos disponibles y barras de progreso. |
-| **Pagos** | `/pagos` | `GET` | Historial de recibos con balance total recaudado y control de pagos pendientes. |
-| **Servicios** | `/servicios` | `GET` | Catálogo deportivo con tarifas mensuales renderizado con `th:each`. |
-| **Eventos** | `/eventos` | `GET` | Cronograma de válidas departamentales y campamentos de velocidad. |
-| **Institucional** | `/mision`, `/vision`, `/valores` | `GET` | Información corporativa y estratégica de la escuela. |
+| Módulo | Método | URI / Endpoint | Descripción Funcional | Parámetros / Request Body | Códigos HTTP |
+| :--- | :---: | :--- | :--- | :--- | :---: |
+| **1. Aspirantes** | `GET` | `/api/v1/aspirantes` | Listar todos los aspirantes registrados | Ninguno | `200 OK` |
+| **1. Aspirantes** | `GET` | `/api/v1/aspirantes/{id}` | Consultar aspirante por identificador | `id` (path, Long) | `200 OK`, `404 Not Found` |
+| **1. Aspirantes** | `POST` | `/api/v1/aspirantes` | Registrar nuevo aspirante (alta y pago auto) | `Aspirante` (JSON Body) | `201 Created`, `400 Bad Request` |
+| **2. Alumnos** | `GET` | `/api/v1/alumnos` | Directorio general de alumnos matriculados | Ninguno | `200 OK` |
+| **2. Alumnos** | `GET` | `/api/v1/alumnos/{id}` | Consultar ficha técnica del alumno | `id` (path, Long) | `200 OK`, `404 Not Found` |
+| **2. Alumnos** | `GET` | `/api/v1/alumnos/nivel/{nivel}` | Filtrar alumnos por categoría deportiva | `nivel` (Principiante, Intermedio, Avanzado) | `200 OK` |
+| **2. Alumnos** | `PATCH` | `/api/v1/alumnos/{id}/estado` | Modificar estado de matrícula | `id` (path), `estado` (query) | `200 OK`, `404 Not Found` |
+| **3. Instructores** | `GET` | `/api/v1/instructores` | Listar cuerpo técnico y entrenadores | Ninguno | `200 OK` |
+| **3. Instructores** | `GET` | `/api/v1/instructores/{id}` | Consultar perfil y horarios del instructor | `id` (path, Long) | `200 OK`, `404 Not Found` |
+| **4. Clases** | `GET` | `/api/v1/clases` | Grilla de clases con cálculo dinámico de cupos | Ninguno | `200 OK` |
+| **4. Clases** | `GET` | `/api/v1/clases/{id}` | Consultar detalles de clase y pista asignada | `id` (path, Long) | `200 OK`, `404 Not Found` |
+| **4. Clases** | `POST` | `/api/v1/clases` | Programar nueva sesión de entrenamiento | `Clase` (JSON Body) | `201 Created`, `400 Bad Request` |
+| **5. Pagos** | `GET` | `/api/v1/pagos` | Historial de transacciones y mensualidades | Ninguno | `200 OK` |
+| **5. Pagos** | `GET` | `/api/v1/pagos/{id}` | Consultar comprobante de pago | `id` (path, Long) | `200 OK`, `404 Not Found` |
+| **5. Pagos** | `GET` | `/api/v1/pagos/metricas` | Balance financiero (recaudo, pendientes) | Ninguno | `200 OK` |
+| **5. Pagos** | `POST` | `/api/v1/pagos` | Registrar nuevo comprobante de pago | `Pago` (JSON Body) | `201 Created`, `400 Bad Request` |
+| **6. Asistencia** | `GET` | `/api/v1/asistencias` | Registro global de asistencias en pista | Ninguno | `200 OK` |
+| **6. Asistencia** | `GET` | `/api/v1/asistencias/alumno/{alumnoId}` | Historial de asistencias por alumno | `alumnoId` (path, Long) | `200 OK` |
+| **6. Asistencia** | `GET` | `/api/v1/asistencias/clase/{claseId}` | Lista de asistencia de una clase | `claseId` (path, Long) | `200 OK` |
+| **6. Asistencia** | `POST` | `/api/v1/asistencias` | Marcar asistencia (Presente, Ausente, Justificado) | `Asistencia` (JSON Body) | `201 Created`, `400 Bad Request` |
+| **7. Institucional** | `GET` | `/api/v1/institucional/servicios` | Catálogo de planes y mensualidades | Ninguno | `200 OK` |
+| **7. Institucional** | `GET` | `/api/v1/institucional/eventos` | Cronograma de válidas y torneos | Ninguno | `200 OK` |
+| **7. Institucional** | `GET` | `/api/v1/institucional/corporativo` | Misión, visión y valores corporativos | Ninguno | `200 OK` |
+
+---
+
+## 🚀 4. Acceso a Swagger UI y Especificación OpenAPI
+
+Una vez iniciada la aplicación en `http://localhost:8080`:
+
+* 🖥️ **Interfaz Gráfica Swagger UI:**  
+  [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+* 📄 **Especificación OpenAPI 3.0 (JSON):**  
+  [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ---
 
 ## ⚙️ 5. Instrucciones de Ejecución Local
 
-### Prerrequisitos
-- Java Development Kit (JDK) 17 o 21.
-- Conexión a Internet para resolución de dependencias.
-
-### Pasos para iniciar:
 ```bash
-# 1. Clonar el repositorio
+# 1. Clonar el repositorio oficial
 git clone https://github.com/adrianys2005/rollerspeed-pmv.git
 cd rollerspeed
 
-# 2. Ejecutar la aplicación con Maven Wrapper
+# 2. Iniciar el servidor Spring Boot
 ./mvnw spring-boot:run
 
-# 3. Abrir en el navegador web
-http://localhost:8080
+# 3. Abrir la documentación interactiva en el navegador
+http://localhost:8080/swagger-ui/index.html
 ```
-
----
-
-## 📄 6. Evidencia de Aprendizaje Entregada
-- **Documento Oficial:** `Saumeth_Adrianys_Desarrollo_de_un_producto_minimo_viable.docx`
-- **Ponderación:** 100 / 100 Puntos según rúbrica de evaluación.

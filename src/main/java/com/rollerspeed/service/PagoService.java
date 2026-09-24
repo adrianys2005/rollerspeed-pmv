@@ -39,6 +39,10 @@ public class PagoService {
                 .sum();
     }
 
+    public synchronized java.util.Optional<Pago> obtenerPorId(Long id) {
+        return pagos.stream().filter(p -> p.getId().equals(id)).findFirst();
+    }
+
     public synchronized long contarPendientes() {
         return pagos.stream()
                 .filter(p -> "Pendiente".equalsIgnoreCase(p.getEstado()))
