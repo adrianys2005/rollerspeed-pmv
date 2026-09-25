@@ -17,7 +17,7 @@ En cumplimiento de los criterios de evaluación y el trabajo colaborativo en equ
 | :--- | :--- | :--- |
 | **Adrianys Saumeth** | **Líder Técnico & Desarrollador Backend REST** | • Arquitectura de la API REST y configuración de Springdoc OpenAPI 3.0 (`OpenApiConfig`).<br>• Implementación de `@RestController` para Aspirantes, Alumnos y Pagos.<br>• Mapeo de códigos de respuesta HTTP (200, 201, 400, 404) y administración de Git. |
 | **Simón Cano Rojas** | **Ingeniero de Integración & Documentador OpenAPI** | • Enriquecimiento semántico de la documentación con `@Tag`, `@Operation`, `@Parameter` y `@Schema`.<br>• Implementación de `@RestController` para Clases, Instructores y Asistencia.<br>• Pruebas de contrato y validación de interoperabilidad desde Swagger UI. |
-| **Yulian Germayony Mosquera Cetre** *(o asignado por grupo)* | **Especialista de Calidad (QA) & Documentación** | • Pruebas automatizadas de endpoints REST mediante herramientas HTTP / curl.<br>• Verificación de esquemas JSON en `/v3/api-docs` y validación de flujos CRUD.<br>• Redacción del informe técnico formal y estructuración del video demostrativo. |
+| **Yulian Germayony Mosquera Cetre** | **Especialista de Calidad (QA) & Documentación** | • Pruebas automatizadas de endpoints REST mediante herramientas HTTP / curl.<br>• Verificación de esquemas JSON en `/v3/api-docs` y validación de flujos CRUD.<br>• Redacción del informe técnico formal y estructuración del video demostrativo. |
 
 ---
 
